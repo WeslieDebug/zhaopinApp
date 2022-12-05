@@ -1,14 +1,19 @@
-import React from "react";
+import React,{Component} from "react";
 import { Result,WhiteSpace,Flex,List,Button,WingBlank,Modal } from "antd-mobile";
 import { connect } from "react-redux";
 import { Link,Redirect } from "react-router-dom";
 import browserCookie from "browser-cookies"
-import { logout } from "../../../redux/user.redux";  
+import { logout} from "../../../redux/user.redux";  
+import "./user.css";
 
 @connect(state=>state.user,{
-    logout
+    logout,
 })
-class User extends React.Component{
+class User extends Component{
+
+    information(){
+        this.props.history.push(this.props.type==="BOSS"?"/bossinfo":"/geniusinfo");
+    }
 
     logout(){
         Modal.alert("提示","您确定要退出登录吗？",[
@@ -66,14 +71,27 @@ class User extends React.Component{
                 <div style={{color:"#888",textIndent:20,padding:"10px 15px",backgroundColor:"#fff",borderBottom:"1px solid #eee"}}>
                     {this.props.desc}
                 </div>
-                <WhiteSpace/>
-                <WhiteSpace/>
+
+
+                <WingBlank>
+                    <Button 
+                        type="warning"
+                        className="modify-personal-information"
+                        onClick={this.information.bind(this)}
+                    >修改个人信息</Button>
+                </WingBlank>
+
+
+                <div className="exit-login">
                 <WingBlank>
                     <Button 
                         type="warning"
                         onClick={this.logout.bind(this)}
                     >退出登录</Button>
                 </WingBlank>
+                </div>
+
+
                 <WhiteSpace/>
                 <WhiteSpace/>
             </div>

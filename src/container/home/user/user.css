@@ -1,0 +1,9 @@
+.exit-login {
+    position: fixed;
+    bottom: 60px;
+    width: 100%;
+}
+
+.modify-personal-information {
+    background-color: #06f;
+}
