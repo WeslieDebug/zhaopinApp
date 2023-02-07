@@ -9,6 +9,7 @@ const _filter = {password:0,__v:0};
 const User = models.getModel("user");//获取用户表
 const Yzm = models.getModel("yzm");//获取验证码表
 const Chat = models.getModel("chat");//聊天表
+const resume = models.getModel("resume");//简历表
 
 //清空数据表接口
 Router.get("/remove",function(req,res){
@@ -280,6 +281,31 @@ Router.post("/getChatList",function(req,res){
                 })
             }
         })
+    })
+})
+
+//牛人完善简历接口
+Router.post("/improveResume",function(req,res){
+    const {userId} = req.cookies;
+    const data = req.body;
+    if(!userId){
+        return res.json({code:0})
+    }
+
+    User.findByIdAndUpdate(userId,data,function(err,doc){
+        if(doc){
+            const docData = Object.assign({},{
+                tel: doc.tel,
+                type: doc.type
+            },data)
+            return res.json({code:1,msg:"保存成功",docData})
+        }else{
+            return res.json({code:0,msg:"保存失败"})
+        }
+
+        if(err){
+            return res.json({code:0,msg:"后端出错"})
+        }
     })
 })
 

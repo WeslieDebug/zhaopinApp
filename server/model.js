@@ -39,6 +39,16 @@ const models = {
         "content":{"type":String,"require":true,"default":""},//发送内容
         "read":{"type":Boolean,"default":false},//是否查阅
         "create_time":{"type":Number,"default":new Date().getTime()}//发送时间
+    },
+    //简历表
+    resume:{
+        "username":{"type":String,"require":true},//用户名
+        "experience":{"type":Number,"require":true},//几年经验
+        "education":{"type":String,"require":true},//教育经历，本科/硕士
+        "personalAdvantages":{"type":String,"require":true,"default":""},//个人优势
+        "workExperience":{"type":String,"require":true},//工作经历
+        "projectExperience":{"type":String,"require":true},//项目经历
+        "educationalExperience":{"type":String,"require":true},//教育经历，详细信息
     }
 }
 

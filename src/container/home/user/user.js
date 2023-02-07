@@ -15,6 +15,10 @@ class User extends Component{
         this.props.history.push(this.props.type==="BOSS"?"/bossinfo":"/geniusinfo");
     }
 
+    improveResume(){
+        this.props.history.push("/improveResume");
+    }
+
     logout(){
         Modal.alert("提示","您确定要退出登录吗？",[
             {
@@ -75,10 +79,18 @@ class User extends Component{
 
                 <WingBlank>
                     <Button 
-                        type="warning"
-                        className="modify-personal-information"
+                        // type="warning"
+                        // className="modify-personal-information"
                         onClick={this.information.bind(this)}
                     >修改个人信息</Button>
+                </WingBlank>
+
+                <WingBlank>
+                    <Button 
+                        // type="warning"
+                        // className="modify-personal-information"
+                        onClick={this.improveResume.bind(this)}
+                    >完善简历</Button>
                 </WingBlank>
 
 

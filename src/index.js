@@ -22,6 +22,7 @@ import Register from "./container/register/register";
 import AuthRoute from "./components/authroute/authroute";
 import BossInfo from "./container/bossinfo/bossinfo";
 import GeniusInfo from "./container/geniusinfo/geniusinfo";
+import improveResume from "./container/resume/improveResume";
 import Home from "./container/home/home";
 import ChatDetails from "./container/chat-details/chat-details";
 
@@ -42,6 +43,7 @@ ReactDOM.render(
                 <AuthRoute></AuthRoute>{/* 登录验证组件 */}
                 <Switch>
                     <Route path="/geniusInfo" component={GeniusInfo}/>
+                    <Route path="/improveResume" component={improveResume}/>
                     <Route path="/bossinfo" component={BossInfo}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
