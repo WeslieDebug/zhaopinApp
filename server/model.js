@@ -43,12 +43,15 @@ const models = {
     //简历表
     resume:{
         "username":{"type":String,"require":true},//用户名
+        "sex":{"type":String},
+        "age":{"type":Number},
+        "title":{"type":String},//职位名称
+        "money":{"type":String},//职位薪水
         "experience":{"type":Number,"require":true},//几年经验
         "education":{"type":String,"require":true},//教育经历，本科/硕士
+        "school":{"type":String,"require":true},//毕业院校
         "personalAdvantages":{"type":String,"require":true,"default":""},//个人优势
         "workExperience":{"type":String,"require":true},//工作经历
-        "projectExperience":{"type":String,"require":true},//项目经历
-        "educationalExperience":{"type":String,"require":true},//教育经历，详细信息
     }
 }
 

@@ -292,20 +292,15 @@ Router.post("/improveResume",function(req,res){
         return res.json({code:0})
     }
 
-    User.findByIdAndUpdate(userId,data,function(err,doc){
-        if(doc){
-            const docData = Object.assign({},{
-                tel: doc.tel,
-                type: doc.type
-            },data)
-            return res.json({code:1,msg:"保存成功",docData})
-        }else{
-            return res.json({code:0,msg:"保存失败"})
-        }
-
+    const resumeModel = new resume(data);
+    resumeModel.save(function(err,doc){
         if(err){
             return res.json({code:0,msg:"后端出错"})
         }
+        const { _id } = doc;
+        res.cookie("userId",_id)
+
+        return res.json({code:1,msg:"简历完善成功",data:{ doc }})
     })
 })
 

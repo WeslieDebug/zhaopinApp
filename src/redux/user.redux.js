@@ -129,6 +129,7 @@ export function updateInfaSuccess(data){
 
 //updateInfo action
 export function updateInfo(data,callback){
+    console.log(data);
     return dispatch=>{
         axios.post("/user/updateInfo",data).then(res=>{
             if(res.code===1){
@@ -153,5 +154,28 @@ export function updateInfo(data,callback){
 export function logout(){
     return {
         type:  LOGOUT
+    }
+}
+
+//improveResumeAction action
+export function improveResumeAction(data,callback){
+    return dispatch=>{
+        console.log(data);
+        axios.post("/user/improveResume",data).then(res=>{
+            if(res.code===1){
+                Toast.success(res.msg, 2, ()=>{
+                    dispatch(updateInfaSuccess(data))
+                    callback&&callback();
+                });
+            }else{
+                Toast.fail(res.msg,2,()=>{
+                    dispatch(handle_error(res.msg))
+                });
+            }
+        }).catch(err=>{
+            Toast.fail("请求出错",2,()=>{
+                dispatch(handle_error("请求出错"))
+            });
+        })
     }
 }

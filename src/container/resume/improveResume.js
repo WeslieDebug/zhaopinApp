@@ -2,7 +2,7 @@ import React,{Component} from "react";
 import {connect} from "react-redux";
 import { NavBar,InputItem,TextareaItem,Button,WingBlank,WhiteSpace,Picker,List,Toast,Icon } from "antd-mobile";
 import ChooseHeadImage from "../../components/choose-head-image/choose-head-image";
-import {updateInfo} from "../../redux/user.redux";
+import {improveResumeAction} from "../../redux/user.redux";
 
 const seasons = [
     {
@@ -14,9 +14,28 @@ const seasons = [
         value: '女',
     },
 ];
+
+const educationals = [
+    {
+        label: '高中及以下',
+        value: '高中及以下',
+    },
+    {
+        label: '本科',
+        value: '本科',
+    },
+    {
+        label: '硕士',
+        value: '硕士',
+    },
+    {
+        label: '博士',
+        value: '博士',
+    },
+];
   
 @connect(state=>state.user,{
-    updateInfo
+    improveResumeAction
 })
 class improveResume extends Component{
     constructor(props){
@@ -25,24 +44,28 @@ class improveResume extends Component{
             sex:["男"],
             username:"",
             age:"",
-            avatar:"",
             title:"",
             money:"",
-            desc:"",
-            type:"NIUREN"
+            experience:"",
+            educational:"",
+            school:"",
+            personalAdvantages:"",
+            workExperience:"",
         }
     }
 
     componentWillMount(){
         this.setState({
-            sex:[this.props.sex]||["男"],
+            sex:this.props.sex,
             username:this.props.username,
             age:this.props.age,
-            avatar:this.props.avatar,
             title:this.props.title,
             money:this.props.money,
-            desc:this.props.desc,
-            type:"NIUREN"
+            experience:this.props.experience,
+            educational:this.props.educational,
+            school:this.props.school,
+            personalAdvantages:this.props.personalAdvantages,
+            workExperience:this.props.workExperience,
         })
     }
 
@@ -62,8 +85,8 @@ class improveResume extends Component{
             }
         }
 
-        this.props.updateInfo(this.state,()=>{
-            this.props.history.push("/genius")
+        this.props.improveResumeAction(this.state,()=>{
+            this.props.history.push("/user")
         });
     }
 
@@ -84,7 +107,7 @@ class improveResume extends Component{
                         >完善信息</NavBar>
                     )
                 }
-                <ChooseHeadImage 
+                {/* <ChooseHeadImage 
                     clickHandle={t=>{
                         this.setState({
                             ...this.state,
@@ -92,7 +115,7 @@ class improveResume extends Component{
                         })
                     }}
                     icon_path={this.state.avatar}
-                ></ChooseHeadImage>
+                ></ChooseHeadImage> */}
                 <WhiteSpace/>
                 <List style={{ backgroundColor: 'white' }} className="picker-list">
                 <InputItem 
@@ -131,13 +154,50 @@ class improveResume extends Component{
                         onChange={v=> this.changeHandle("money",v)}
                         value={this.state.money}
                     >意向薪资</InputItem>
+                    <InputItem
+                        type="text"
+                        placeholder="请输入工作经验年限"
+                        onChange={v => this.changeHandle("experience", v)}
+                        value={this.state.experience}
+                        extra='年'
+                    >工作经验</InputItem>
+                    <Picker
+                        title="选择学历"
+                        extra="请选择"
+                        cols={1}
+                        data={educationals}
+                        value={this.state.educational}
+                        onChange={v => this.changeHandle("educational", v)}
+                    >
+                        <List.Item arrow="horizontal">学历</List.Item>
+                    </Picker>
+                    {/* <InputItem
+                        type="text"
+                        placeholder="学历"
+                        onChange={v => this.changeHandle("educational", v)}
+                        value={this.state.educational}
+                    >学历</InputItem> */}
+                    <InputItem
+                        type="text"
+                        placeholder="毕业院校"
+                        onChange={v => this.changeHandle("school", v)}
+                        value={this.state.school}
+                    >毕业院校</InputItem>
                     <TextareaItem
-                        title="个人简介" 
-                        placeholder="请输入个人简介"
-                        rows={3} 
+                        title="个人优势：" 
+                        placeholder="请输入个人优势"
+                        rows={6} 
                         autoHeight
-                        onChange={v => this.changeHandle("desc",v)}
-                        value={this.state.desc}
+                        onChange={v => this.changeHandle("personalAdvantages",v)}
+                        value={this.state.personalAdvantages}
+                    ></TextareaItem>
+                    <TextareaItem
+                        title="工作经历："
+                        placeholder="请输入工作经历"
+                        rows={6}
+                        autoHeight
+                        onChange={v => this.changeHandle("workExperience", v)}
+                        value={this.state.workExperience}
                     ></TextareaItem>
                 </List>
                 <WhiteSpace/>
